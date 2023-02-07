@@ -1,9 +1,12 @@
 const db = require('../services/db');
 const config = require('../config');
 
+
+//be able to modify the program (function) to display authors by first letter (ie "B")
 function getMultiple(page = 1) {
   const offset = (page - 1) * config.listPerPage;
-  const data = db.query(`SELECT * FROM quote LIMIT ?,?`, [offset, config.listPerPage]);
+  const data = db.query(`SELECT * FROM quote WHERE author LIKE 'C%' LIMIT ?,?`, [offset, config.listPerPage]);
+  // const data = db.query(`SELECT * FROM quote WHERE author = "M%"`,[offset, config.listPerPage]);
   const meta = {page};
 
   return {
